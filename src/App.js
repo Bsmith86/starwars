@@ -1,28 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import Nav from './components/nav'
+import React, {useState, useEffect} from 'react';
+import Card from './components/starships';
 
 function App() {
-  const testFunction = async () => {
-    const response = await  fetch('/test_route');
-    
+const [starships, setStarships] = useState([]);
+
+useEffect(() => {
+  async function fetchShips(){
+    let res = await fetch('https://swapi.dev/api/starships/');
+    let data = await res.json();
+    setStarships(data.results);
+    console.log(data);
   }
-  testFunction()
+
+    fetchShips();
+}, [])
+
+console.log(starships);
+
+const shipsJSX = () => {
+  let ships = starships.map((item) => {
+    return <Card key={item.url} ship={item.name} />
+  })
+  return ships;
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav />
+      <section id="container">{shipsJSX()}</section>
+      
     </div>
   );
 }

@@ -1,0 +1,15 @@
+#shipCard {
+    background-color: rgb(34, 164, 151);
+    border: black solid 2px;
+    border-radius: 15%;
+    max-width: 200px;
+    margin: 10px;
+    row-gap: 10px;
+    column-gap: 20px;
+    align-content:center
+}
+
+/* .ships {
+    display: flex;
+    flex-direction: row;
+} */
